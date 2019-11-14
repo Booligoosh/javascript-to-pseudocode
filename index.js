@@ -103,6 +103,15 @@ function objToString (obj) {
             return `${objToString(obj.callee)}(${obj.arguments.map(arg => objToString(arg)).join(`, `)})`
         case `MemberExpression`:
             return `${objToString(obj.object)}.${objToString(obj.property)}`
+        case `TemplateLiteral`:
+            temp = []
+            for (let i = 0; i < Math.max(obj.quasis.length, obj.expressions.length); i++) {
+                if (i < obj.quasis.length) temp.push(objToString(obj.quasis[i]))
+                if (i < obj.expressions.length) temp.push(objToString(obj.expressions[i]))
+            }
+            return temp.join(` + `)
+        case `TemplateElement`:
+            return `'${obj.value.raw}'`
         default:
             console.log(`Unknown obj type`, obj.type, JSON.stringify(obj, null, 2))
             return `\x1b[31m${obj.type} not implemented\x1b[0m`
