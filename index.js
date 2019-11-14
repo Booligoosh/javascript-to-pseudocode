@@ -114,7 +114,6 @@ function objToString (obj) {
         default:
             console.log(`Unknown obj type`, obj.type, JSON.stringify(obj, null, 2))
             return `\x1b[31m${obj.type} not implemented\x1b[0m`
-        break
     }
 }
 
