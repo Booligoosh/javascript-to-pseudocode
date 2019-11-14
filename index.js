@@ -1,6 +1,6 @@
 // Settings
 const INDENT_SIZE = 4
-const CAPITALIZATION = `CAPITALIZE` // `LOWERCASE`, `UPPERCASE`, `CAPITALIZE`, or null
+const CAPITALIZATION = null // `LOWERCASE`, `UPPERCASE`, `CAPITALIZE`, or null
 
 // End settings
 const fs = require(`fs`)
@@ -51,7 +51,7 @@ function objToString (obj) {
             return `WHILE ${objToString(obj.test)}\n${objToString(obj.body)}\nENDWHILE`
         case `IfStatement`:
         case `ElseIfStatement`:
-            temp = `${obj.type === `ElseIfStatement` ? `\nELSE ` : ``}IF ${objToString(obj.test)}\n`
+            temp = `${obj.type === `ElseIfStatement` ? `\nELSE ` : ``}IF ${objToString(obj.test)} THEN\n`
             temp += `${objToString(obj.consequent)}`
             if (obj.alternate) {
                 if (obj.alternate.type == `IfStatement`) {
@@ -80,13 +80,13 @@ function objToString (obj) {
             if (obj.left.type === `Identifier`
             && obj.right.type === `CallExpression`
             && obj.right.callee.name === `prompt`) {
-                return `INPUT ${objToString(obj.left)}`
+                return `get ${objToString(obj.left)}`
             }
             return `${objToString(obj.left)} ${obj.operator} ${objToString(obj.right)}`
         case `VariableDeclaration`:
             return obj.declarations.map(declaration => {
                 if (declaration.init.type === `CallExpression` && declaration.init.callee.name === `prompt`) {
-                    return `INPUT ${objToString(declaration.id)}`
+                    return `get ${objToString(declaration.id)}`
                 }
                 return `${objToString(declaration.id)} = ${objToString(declaration.init)}`
             }).join(`\n`)
@@ -97,7 +97,7 @@ function objToString (obj) {
             || calleeAsString === `console.info`
             || calleeAsString === `console.error`
             || calleeAsString === `console.warning`) {
-                return `PRINT ${obj.arguments.map(arg => objToString(arg)).join(` + `)}`
+                return `Display ${obj.arguments.map(arg => objToString(arg)).join(`; `)}`
             }
             return `${objToString(obj.callee)}(${obj.arguments.map(arg => objToString(arg)).join(`, `)})`
         case `MemberExpression`:

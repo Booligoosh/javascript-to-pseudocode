@@ -18,8 +18,8 @@ while (number) {
     }
     number = prompt()
 }
-console.log(`Divisible by two only: ${two}!`)
-console.log(`Divisible by three only: ${three}!`)
-console.log(`Divisible by both: ${both}!`)
-console.log(`Divisible by neither: ${neither}!`)
-console.log(two, three, 123, `hello`, hello.world(5, 7 + 1))
+// console.log(`Divisible by two only: ${two}!`)
+// console.log(`Divisible by three only: ${three}!`)
+// console.log(`Divisible by both: ${both}!`)
+// console.log(`Divisible by neither: ${neither}!`)
+console.log(two, three, both, neither)
