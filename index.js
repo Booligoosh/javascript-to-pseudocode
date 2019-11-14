@@ -51,6 +51,7 @@ function objToString (obj) {
             return `WHILE ${objToString(obj.test)}\n${objToString(obj.body)}\nENDWHILE`
         case `IfStatement`:
         case `ElseIfStatement`:
+            // I made this type up — see the IfStatement case code
             temp = `${obj.type === `ElseIfStatement` ? `\nELSE ` : ``}IF ${objToString(obj.test)} THEN\n`
             temp += `${objToString(obj.consequent)}`
             if (obj.alternate) {
