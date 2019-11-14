@@ -1,23 +1,22 @@
 // Settings
 const INDENT_SIZE = 4
 const CAPITALIZATION = `CAPITALIZE` // `LOWERCASE`, `UPPERCASE`, `CAPITALIZE`, or null
+
 // End settings
 const fs = require(`fs`)
 const esprima = require('esprima')
 const program = fs.readFileSync('program.js').toString()
 
-// console.log(program)
-
-const parsed = esprima.parseScript(program)
-
-// console.log(JSON.stringify(parsed, null, 2))
-const pseudocode = `BEGIN
-${parsed.body.map(item => indentLines(objToString(item), 1)).join(`\n`)}
-END`
+const pseudocode = javaScriptToPseudoCode(program)
 console.log(`------------------------`)
 console.log(`Here is your pseudocode!`)
 console.log(`------------------------`)
 console.log(pseudocode)
+
+function javaScriptToPseudoCode (javaScript) {
+    const parsed = esprima.parseScript(program)
+    return `BEGIN\n${parsed.body.map(item => indentLines(objToString(item), 1)).join(`\n`)}\nEND`
+}
 
 function objToString (obj) {
     const type = obj.type
