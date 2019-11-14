@@ -18,4 +18,4 @@ while (number) {
     }
     number = prompt()
 }
-console.log(two, three, 123, `hELLo`, hello.world(5, 7 + 1))
+console.log(two, three, 123, 'hELLo', hello.world(5, 7 + 1))
