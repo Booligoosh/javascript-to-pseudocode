@@ -1,0 +1,9 @@
+{
+    "main": "index.js",
+    "dependencies": {
+        "esprima": "^4.0.1"
+    },
+    "scripts": {
+        "start": "node index.js"
+    }
+}
